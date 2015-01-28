@@ -70,6 +70,7 @@
                 game.load.image('laser', './assets/images/laser.png');
                 game.load.image('trooper', './assets/images/trooper.png');
                 game.load.spritesheet('mummy', './assets/images/mummy.png', 37, 45, 18);
+                game.load.spritesheet('zombie', './assets/images/zombie.png', 44, 48,18);
                 game.load.image('star', './assets/images/star.png');
                 game.load.image('bala', './assets/images/bala.png');
                 game.load.audio('shooter', './assets/shooter.mp3');
@@ -161,6 +162,9 @@
                 enemies.enableBody = true;
                 //enemies.lives = 3;
                 enemies.physicsBodyType = Phaser.Physics.ARCADE;
+
+
+
                 createEnemies();
 
                 //balas enemigos
@@ -221,6 +225,23 @@
                     cantidadEnemigos++;
                     // enemigo.body.moves = false;
                 }
+                if(level > 3){
+                    for (var i = 0; i <= (level * 2); i++) {
+                    var x = Math.floor((Math.random() * 800) + 1);
+                    ;
+                    var y = Math.floor((Math.random() * 600) + 1);
+                    ;
+                    var enemigo = enemies.create(x + i, y + i, 'zombie');
+                    enemigo.anchor.setTo(0.5, 0.5);
+                    enemigo.animations.add('fly', [0, 7, 13], 10, true);
+                    enemigo.play('fly');
+                    enemigo.lives = 6;
+                    enemigo.body.collideWorldBounds = true;
+                    cantidadEnemigos++;
+                    // enemigo.body.moves = false;
+                }
+                }
+                
                 // enemigo.x = 100;
                 //enemigo.y = 50;
 
@@ -486,9 +507,9 @@
                 }
 
                 //  Run collision
-                game.physics.arcade.overlap(laser, enemies, collisionHandler, null, this);
-                game.physics.arcade.overlap(trooper, enemyBullets, collisionTrooper, null, this);
-                game.physics.arcade.overlap(trooper, enemies, collisionEnemies, null, this);
+                //game.physics.arcade.overlap(laser, enemies, collisionHandler, null, this);
+                //game.physics.arcade.overlap(trooper, enemyBullets, collisionTrooper, null, this);
+                //game.physics.arcade.overlap(trooper, enemies, collisionEnemies, null, this);
                 // game.physics.arcade.overlap(enemies, trooper, collisionEnemy, null, this
                 // 
                 if (enemies.length == 0) {
